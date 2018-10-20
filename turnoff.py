@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 import sys
-
+import os
+import datetime
+import time
+import re
+import time 
 
 
 if sys.platform.startswith('linux'):
@@ -25,7 +29,31 @@ elif sys.platform.startswith('win'):
 
 elif sys.platform.startswith('darwin'):
 	import subprocess
-	subprocess.call('echo \'tell application "Finder" to sleep\' | osascript', shell=True)
+	sleeptime = datetime.datetime.now() + datetime.timedelta(seconds=5)
+	sleeptime = sleeptime.strftime('"%m/%d/%y %H:%M:%S"')
+	os.system("sudo pmset schedule wake " + sleeptime)
+	
+	while(1):
+                subprocess.call('echo \'tell application "Finder" to sleep\' | osascript', shell=True)
+                ans = input("Enter a q or else: ")
+                if(ans == "q"):
+                        sys.exit() 
+                
+
+
+
+
+
+                
+        
+
+
+
+
+
+        
+	
+	
 	
 
 
