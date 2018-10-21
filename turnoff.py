@@ -2,18 +2,20 @@
 import sys
 import os
 
-if sys.platform.startswith('linux'):
-        import os
-        os.system("xset dpms force off")
+def turn_off():
 
-elif sys.platform.startswith('win'):
-        import subprocess
-        subprocess.call("turnoff.exe")
+	if sys.platform.startswith('linux'):
+			import os
+			os.system("xset dpms force off")
 
-        
-elif sys.platform.startswith('darwin'):
-        import subprocess
-        subprocess.call('echo \'tell application "Finder" to sleep\' | osascript', shell=True)
+	elif sys.platform.startswith('win'):
+			import subprocess
+			subprocess.call("turnoff.exe")
+
+			
+	elif sys.platform.startswith('darwin'):
+			import subprocess
+			subprocess.call('echo \'tell application "Finder" to sleep\' | osascript', shell=True)
 
 
 
