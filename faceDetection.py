@@ -10,16 +10,16 @@ import cv2 as cv
 
 
 '''Both are good but lbpcascades & full_face works better'''
-PATH_TO_HAARCASCADES = 'C:\\Users\\Siddhant\\Python\\Project Vision\\opencv-master\\data\\haarcascades\\'
-FRONTALFACE_DEFAULT = 'haarcascade_frontalface_default.xml'
-PATH_TO_LBPCASCADES = 'C:\\Users\\Siddhant\\Python\\Project Vision\\opencv-master\\data\\lbpcascades\\'
-FULL_FACE = 'lbpcascade_frontalface_improved.xml'
+#PATH_TO_HAARCASCADES = 'C:\\Users\\Siddhant\\Python\\Project Vision\\opencv-master\\data\\haarcascades\\'
+#FRONTALFACE_DEFAULT = 'haarcascade_frontalface_default.xml'
+PATH_TO_LBPCASCADES = '/Users/zak/Desktop/Project_Theia/lbpcascade_frontalface_improved.xml'
+#FULL_FACE = 'lbpcascade_frontalface_improved.xml'
 WAIT_TIME = 3
 
 def detect_face():
     #variable that stores number of faces detected
     numfaces = -1
-    face_cascade = cv.CascadeClassifier(PATH_TO_LBPCASCADES + FULL_FACE)
+    face_cascade = cv.CascadeClassifier(PATH_TO_LBPCASCADES)
     camera = cv.VideoCapture(0);
     while True:
         (valid, frame) = camera.read()

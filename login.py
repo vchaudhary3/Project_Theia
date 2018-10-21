@@ -1,15 +1,15 @@
 # when we login 
 # import the necessary packages
-from imutils.video import VideoStream
-import imutils
+#from imutils.video import VideoStream
+#import imutils
 import time
 import cv2
 import os
 
 """PATH TO CASCADE & OUTPUT OF DATASET"""
 
-PATH_TO_DATASET = "C:\\Users\\Siddhant\\Documents\\GitHub\\Project_Theia\\data_set"
-RATE = 2.5 #frame rate
+PATH_TO_DATASET = "/Users/zak/Desktop/Project_Theia/data_set"
+RATE = 2 #frame rate
  
 # initialize the video stream, allow the camera sensor to warm up,
 # and initialize the total number of example faces written to disk
@@ -36,16 +36,17 @@ def get_dataSet():
             p = os.path.sep.join([PATH_TO_DATASET, "{}.png".format(str(numPics).zfill(5))])
             cv2.imwrite(p, copy)
             numPics = numPics + 1
+            print(p)
             
         key = cv2.waitKey(1) & 0xFF
         if(key == ord("q")):
             break
 
         if(numPics <= 20):
-            cv2.putText(frame, "Setting up your face", (200,400), 
+            cv2.putText(frame, "Setting up your face", (500,700), 
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
         else:
-            cv2.putText(frame, "SUCCESS", (300,400), 
+            cv2.putText(frame, "SUCCESS", (600,700), 
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
 
         cv2.imshow("frame",  frame)

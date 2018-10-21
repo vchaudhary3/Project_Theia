@@ -5,22 +5,29 @@ face recognition
 """
 
 # import the necessary packages
-from imutils import paths
+#from imutils import paths
+from PIL import Image
 import face_recognition
+#from dlib import face_recognition_model_v1 as face_recognition
 import pickle
 import cv2
 import os
 
-PATH_TO_DATASET = "C:\\Users\\Siddhant\\Documents\\GitHub\\Project_Theia\\data_set"
+PATH_TO_DATASET = "/Users/zak/Desktop/Project_Theia/data_set"
 DETECTION_METHOD = "hog" # or "cnn"
-PATH_TO_USER = "C:\\Users\\Siddhant\\Documents\\GitHub\\Project_Theia\\Users"
-WRITE_FILE = "collin.txt"
+PATH_TO_USER = "/Users/zak/Desktop/Project_Theia/users/collin.txt"
+#WRITE_FILE = "collin.txt"
 
 def generate_encodings():
     # grab the paths to the input images in our dataset
     #print("[INFO] quantifying faces...")
-    imagePaths = list(paths.list_images(PATH_TO_DATASET))
-     
+    imagePaths = []
+    valid_images = [".jpg",".gif",".png",".tga"]
+    for f in os.listdir(PATH_TO_DATASET):
+        ext = os.path.splitext(f)[1]
+        if ext.lower() not in valid_images:
+            continue
+        imagePaths.append(os.path.join(PATH_TO_DATASET,f))
     # initialize the list of known encodings and known names
     knownEncodings = []
     # loop over the image paths
@@ -45,6 +52,8 @@ def generate_encodings():
     		knownEncodings.append(encoding)
     
     data = {"encodings": knownEncodings}
-    f = os.open(PATH_TO_USER + WRITE_FILE, "wb")
-    f.write(pickle.dumps(data))
-    f.close()
+    file = open(PATH_TO_USER, "wb")
+    file.write(pickle.dumps(data))
+    file.close()
+
+generate_encodings()
