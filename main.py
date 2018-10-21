@@ -35,9 +35,7 @@ if __name__ == '__main__':
                 os.remove(WRITE_FILE)
                 os.remove(PATH_TO_USERINFO)
                 import subprocess
-                subprocess.call(['osascript', '-e',
-                'tell app "System Events" to log off'])
-                sys.exit() 
+                subprocess.call('/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend', shell=True)
     else:
         login.get_dataSet() 
         encode.generate_encodings()
