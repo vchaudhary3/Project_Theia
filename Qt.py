@@ -6,7 +6,7 @@ from PyQt5.QtGui import QIcon, QCursor
 from PyQt5.QtCore import pyqtSlot, Qt
 import time 
  
-class App(QMainWindow):
+class App(QWidget):
  
     def __init__(self):
         super().__init__()
@@ -16,6 +16,7 @@ class App(QMainWindow):
         self.width = 1920
         self.height = 1080
         self.initUI()
+        self.setMouseTracking(True)
     
  
     def initUI(self):
@@ -45,19 +46,17 @@ class App(QMainWindow):
         QMessageBox.question(self, 'Message - pythonspot.com', "You typed: " + textboxValue, QMessageBox.Ok, QMessageBox.Ok)
         self.textbox.setText("")
 
-    def resetCursor(self):
+    def mouseMoveEvent(self, event):
         cursor = QCursor()
-        pos = cursor.pos()
-        y = pos.y()
-         
-        while (y<10):
-             cursor.setPos(1920,1080)
+        if(event.y() < 10):
+            cursor.setPos(1920,1080) 
         
+
+      
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = App()
-    app.setOverrideCursor(QCursor(Qt.BlankCursor))
-    ex.resetCursor()
+    #app.setOverrideCursor(QCursor(Qt.BlankCursor))
     sys.exit(app.exec_())
     
 
