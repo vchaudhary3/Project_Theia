@@ -36,7 +36,6 @@ def get_dataSet():
             p = os.path.sep.join([PATH_TO_DATASET, "{}.png".format(str(numPics).zfill(5))])
             cv2.imwrite(p, copy)
             numPics = numPics + 1
-            print(p)
             
         key = cv2.waitKey(1) & 0xFF
         if(key == ord("q")):
@@ -59,4 +58,5 @@ def get_dataSet():
     cv2.destroyAllWindows()
     camera.release()
 
-get_dataSet()
+if __name__ == '__main__':
+    get_dataSet()

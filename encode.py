@@ -56,4 +56,5 @@ def generate_encodings():
     file.write(pickle.dumps(data))
     file.close()
 
-generate_encodings()
+if __name__ == '__main__':
+    generate_encodings()

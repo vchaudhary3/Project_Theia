@@ -7,7 +7,7 @@ Created on Sat Oct 20 03:58:17 2018
 import time
 import numpy as np
 import cv2 as cv
-
+import turnoff
 
 '''Both are good but lbpcascades & full_face works better'''
 #PATH_TO_HAARCASCADES = 'C:\\Users\\Siddhant\\Python\\Project Vision\\opencv-master\\data\\haarcascades\\'
@@ -41,7 +41,7 @@ def detect_face():
         if(numFaces != 1):
             t_0 = time.time()
             if timer(WAIT_TIME, t_0, face_cascade, camera):
-                print("TIME TO LONG OUT")
+                turnoff.turn_off()
                 break
             
         key = cv.waitKey(1) & 0xFF
@@ -70,11 +70,5 @@ def timer(time_len, t_0, face_cascade, camera):
             return 0
     return 1
     
-def face_recognition(face):
-    print("FACE RECOGNITION HAPPENS")     
-    
-    
-def get_dataset():
-    print("GET DATA SET")
-
-detect_face()
+if __name__ == '__main__':
+    detect_face()

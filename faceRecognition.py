@@ -53,16 +53,24 @@ def recognize():
     	boxes = face_recognition.face_locations(rgb,
     		model=DETECTION_METHOD)
     	encoding = face_recognition.face_encodings(rgb, boxes)
+
+    	encod = len(encoding)
+
+    	if(encod == 0): return False
     	
         # loop over the facial embeddings
         # attempt to match each face in the input image to our known
         # encodings
+
+        
     	match = face_recognition.compare_faces(data["encodings"],
     			encoding[0])
+    	
     	checks = checks + 1
     		# check to see if we have found a match
     	if match[0]:
             numCorrect = numCorrect + 1
     return (numCorrect >= ACCURACY)
         
-print(recognize())
+if __name__ == '__main__':
+    x = recognize()

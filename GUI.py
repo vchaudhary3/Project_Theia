@@ -4,8 +4,17 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QPushButton, QAction, QLineEdit, QMessageBox, QLabel, QVBoxLayout
 from PyQt5.QtGui import QIcon, QCursor, QBrush, QImage, QPainter, QPixmap, QWindow
 from PyQt5.QtCore import pyqtSlot, Qt, QRect
-#from passlib.apps import custom_app_context as pwd_context
+import faceRecognition
+import faceDetection
+from pathlib import Path
+import login
+import encode
+import turnoff
+import os
+import time 
 
+WRITE_FILE = "/Users/zak/Desktop/Project_Theia/users/collin.txt"
+PATH_TO_USERINFO ="/Users/zak/Desktop/Project_Theia/login.txt"
 
 
 def mask_image(imgdata, imgtype='tiff', size=96):
@@ -60,7 +69,7 @@ class App(QWidget):
         self.initUI()
         self.setMouseTracking(True)
         self.flag = 0
-        self.bool = True
+        self.correct = 0
         self.username = ""
         self.password = ""
         self.password1 = "" 
@@ -116,7 +125,7 @@ class App(QWidget):
         if (self.flag == 1):
             self.password1 = self.textbox2.text()
             if (self.password == self.password1):
-                f = open('login.txt', 'w')
+                f = open('/Users/zak/Desktop/Project_Theia/login.txt', 'w')
                 f.write(self.username)
                 f.write(self.password)
                 f.close()
@@ -125,14 +134,18 @@ class App(QWidget):
                 self.flag = 0 
                 return 
             self.flag = 0
-            self.closeAllWindows()
-            sys.exit() 
+            self.close()
+
         else:
-            self.auth()
-            self.closeAllWindows()
-            sys.exit() 
- 
-                                                                                     
+            f = open('/Users/zak/Desktop/Project_Theia/login.txt', 'r')
+            x = f.readline()
+            if(self.username + self.password == x):
+                    self.correct = 1                    
+            else:
+                    self.correct = 0 
+            f.close() 
+            self.close()
+                                                                                    
     def mouseMoveEvent(self, event):
         cursor = QCursor()
         if(event.y() < 10):
@@ -141,24 +154,13 @@ class App(QWidget):
     def register(self):
         self.textbox2.show()
         self.flag = 1
-
+        
     def auth(self):
-        f = open('login.txt', 'r')
-        x = f.readline()
-        print(x) 
-        print(self.username + self.password)
-        if(self.username + self.password == x):
-                return True 
-        else:
-                return False
-        return False 
+        return self.correct 
+
+
+    
            
               
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = App(imgpath=sys.argv[1])
-    app.setOverrideCursor(QCursor(Qt.BlankCursor))     
-    sys.exit(app.exec_())
-    
 
 
