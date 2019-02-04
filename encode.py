@@ -38,7 +38,7 @@ def generate_encodings():
     	image = cv2.imread(imagePath)
     	rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
        
-    
+ #next 4 lines of code already done in faceRecognition, why   
     	# detect the (x, y)-coordinates of the bounding boxes
     	# corresponding to each face in the input image
     	boxes = face_recognition.face_locations(rgb, model=DETECTION_METHOD)
